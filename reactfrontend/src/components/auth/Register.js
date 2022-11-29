@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 function Register() {
-  const [data, setFormValue] = useState({ firstname: '', lastname: '', email: '', password: '',role: '',status:''});
+  const [data, setFormValue] = useState({ firstname: '', lastname: '', email: '', password: '', role: '', status: '' });
 
-  const [password, setPassword] = useState('');
+ 
   const navigate = useNavigate();
   window.axios = require("axios");
   const Submit = (event) => {
@@ -14,12 +14,13 @@ function Register() {
       lastname: data.lastname,
       email: data.email,
       password: data.password,
-      role:data.role,
+      role: data.role,
       status: 0
 
     };
     console.log(api);
-    // axios.post("http://127.0.0.1:8000/api/adduser", api);
+    axios.post("http://127.0.0.1:8000/api/register", api);
+    navigate("/login");
   };
 
   // get data
@@ -42,7 +43,7 @@ function Register() {
             <div className="col-lg-6 mb-5 mb-lg-0 ">
               <div className="card">
                 <div className="card-body py-1 px-md-5">
-                  
+                  <h1>Register</h1>
 
                   <form className="mt-5" onSubmit={Submit}  >
                     {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
@@ -80,17 +81,17 @@ function Register() {
                     <div className="form-outline mb-4">
                       <label >Sign up as:</label>
                       <select className="form-select" name='role' onChange={valueHandler} aria-label="Default select example">
-                      <option value={''} selected>Open this select menu</option>
+                        <option value={''} selected>Open this select menu</option>
                         <option value={'admin'}>Admin</option>
                         <option value={'user'}>User</option>
 
                       </select>
                     </div>
                     {/* <!-- status --> */}
-                    
+
                     {/* <!-- Submit button --> */}
                     <button type="submit" className="btn btn-primary btn-block mb-4">
-                      Sign up
+                      Register
                     </button>
 
                     {/* <!-- Register buttons --> */}

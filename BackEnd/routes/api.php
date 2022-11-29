@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RequestController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,3 +17,7 @@ use App\Http\Controllers\UserController;
 
 Route::post('register',[UserController::class,'store']);
 Route::post('login',[UserController::class,'login']);
+Route::get('user/{id}',[UserController::class,'show']);
+
+Route::post('request',[RequestController::class,'store']);
+Route::get('req',[UserController::class,'index']);

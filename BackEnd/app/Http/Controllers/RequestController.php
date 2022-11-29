@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-class UserController extends Controller
+use App\Models\Requestcar;
+use App\Models\User;
+class RequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,9 @@ class UserController extends Controller
     public function index()
     {
         $users=User::all();
-        return $users;
+     $req=Requestcar::all();
+     dd( $users);
+     return 'ssss';
     }
 
     /**
@@ -35,18 +38,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user=new User();
+        // dd($request);
+        $req=new Requestcar();
+        $req->user_id=$request->user_id;
+        $req->carModel=$request->carModel;
+        $req->carNumber=$request->carNumber;
+        $req->country=$request->country;
+        $req->problem=$request->problem;
+        $req->status='The Request Is Pending Until The Admin Sees It';
+        $req->save();
+        return response()->json(['status'=>200 , 'user'=>$req]);
 
-        $user->firstname=$request->firstname;
-        $user->lastname=$request->lastname;
-        $user->password=Hash::make($request->password);
-        $user->email=$request->email;
-        $user->role=$request->role;
-        $user->status=$request->status;
-
-        $user->save();
-        return response()->json(['status'=>200 , 'user'=>$user]);
-        
     }
 
     /**
@@ -55,29 +57,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public  function login(Request $request) {
-        $user = User::where('email',$request->email)->first();
- 
- 
-         $error = "ERROR!";
- 
-        // if (!$user || !Hash::check($request->password, $user->password)){
-        //      return $error;
-        // }
- 
-        return $user;
-     }
- 
-
-
     public function show($id)
     {
-        $user = User::where('id',$id)->first();  
-        return $user;
+        //
     }
-
-    
 
     /**
      * Show the form for editing the specified resource.

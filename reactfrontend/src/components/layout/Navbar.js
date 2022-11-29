@@ -65,7 +65,9 @@ return (
       <NavLink to="register" className="nav-item nav-link ">
         REGISTER
       </NavLink>
-      
+      <NavLink to="user" className="nav-item nav-link">
+        User Profile
+      </NavLink>
       <NavLink to="contact" className="nav-item nav-link dropdown-toggle ">
         Contact Us
       </NavLink>
