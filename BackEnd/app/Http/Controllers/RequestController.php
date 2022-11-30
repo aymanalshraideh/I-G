@@ -19,7 +19,7 @@ class RequestController extends Controller
      dd( $users);
      return 'ssss';
     }
-
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -57,11 +57,26 @@ class RequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function accept($id)
+    {
+        $accept= Requestcar::where('id',$id)->first();
+        $accept->status='We saw your problem and will be in touch shortly';
+        $accept->save();
+        
+    }
+    public function reject($id)
+    {
+        $reject= Requestcar::where('id',$id)->first();
+        $reject->status='We\'ve seen your problem and can\'t help you at this time';
+        $reject->save();
+        
+    }
     public function show($id)
     {
-        //
+        $req= Requestcar::where('user_id',$id)->first();
+        return $req;
+        
     }
-
     /**
      * Show the form for editing the specified resource.
      *

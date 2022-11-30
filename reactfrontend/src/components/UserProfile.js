@@ -4,6 +4,7 @@ import { useEffect } from "react";
 const UserProfile = () => {
 
     const [data, setData] = useState({});
+    const [req, setreq] = useState({});
     const[carModel,setCarModel]= useState('');
     const[carNumber,setCarNumber]= useState('');
     const[country,setCountry]= useState('');
@@ -20,11 +21,20 @@ const UserProfile = () => {
         // console.log(myProfile)
 
     }
+    const requeststatus = async () => {
+        const response = await fetch('http://127.0.0.1:8000/api/req/' + id)
+        const req = await response.json();
+
+        setreq(req);
+        console.log(req)
+
+    }
 
 
 
     useEffect(() => {
         fetchProfile();
+        requeststatus();
     }
         , []);
 
@@ -84,7 +94,12 @@ const user_id=localStorage.getItem('user');
                                             </ul>
                                             <>
                                                 {/* Button trigger modal */}
-                                                <button
+
+
+{(req.status)?<>
+<h1>status:{req.status}</h1>
+</>:
+ <button
                                                     type="button"
                                                     className="btn btn-primary"
                                                     data-bs-toggle="modal"
@@ -92,6 +107,9 @@ const user_id=localStorage.getItem('user');
                                                 >
                                                     Maintenance Request
                                                 </button>
+}
+
+                                               
                                                 {/* Modal */}
                                                 <div
                                                     className="modal fade"

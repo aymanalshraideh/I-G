@@ -29,10 +29,11 @@ const Login = () => {
         console.log(res)
 
         localStorage.setItem("user", res.data.id);
+        localStorage.setItem("role", res.data.role);
         if (res.data.role=="admin") {
-        navigate("/");
+        navigate("/dashboard");
         }else{
-          navigate("/r");
+          navigate("/user");
         }
 
       })

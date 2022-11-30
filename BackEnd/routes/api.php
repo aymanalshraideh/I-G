@@ -18,6 +18,9 @@ use App\Http\Controllers\RequestController;
 Route::post('register',[UserController::class,'store']);
 Route::post('login',[UserController::class,'login']);
 Route::get('user/{id}',[UserController::class,'show']);
-
+Route::get('accept/{id}',[RequestController::class,'accept']);
+Route::get('reject/{id}',[RequestController::class,'reject']);
+Route::get('req/{id}',[RequestController::class,'show']);
+Route::get('users',[UserController::class,'index']);
 Route::post('request',[RequestController::class,'store']);
-Route::get('req',[UserController::class,'index']);
+

@@ -1,13 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { NavLink ,Link } from "react-router-dom";
 import logo from "../../large_anyvehicle.png";
 const Navbar=()=>{
-
+  const naviagte = useNavigate();
+  function refreshPage() {
+    window.location.reload(false);
+  }
+  function logOut() {
+    localStorage.clear();
+    naviagte('/');
+    refreshPage();
+    }
 return (
     <>
     {/* Navbar Start */}
-<nav className="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+<nav className="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0 ">
   <NavLink to="index.html" className="navbar-brand d-flex align-items-center">
     
     
@@ -54,26 +63,56 @@ return (
         </Link>
         <div className="dropdown-menu bg-light m-0">
           <NavLink to="feature.html" className="dropdown-item">
-            Features
+            page 1
           </NavLink>
          
         </div>
       </div>
-      <NavLink to="login" className="nav-item nav-link">
-        LOGIN
-      </NavLink>
-      <NavLink to="register" className="nav-item nav-link ">
-        REGISTER
-      </NavLink>
-      <NavLink to="user" className="nav-item nav-link">
-        User Profile
-      </NavLink>
       <NavLink to="contact" className="nav-item nav-link dropdown-toggle ">
         Contact Us
       </NavLink>
-      <NavLink to="contact" className="btn btn-danger ">
+      
+      
+      {
+                  (!localStorage.getItem('user'))?
+                  <>
+                  <li className="nav-item pull-right">
+                  <NavLink className="nav-link" to="login">Login</NavLink>
+                </li>
+                <li className="nav-item pull-right">
+                  <NavLink className="nav-link" to="register">Register</NavLink>
+                </li>
+                  </>
+                :
+                <>
+                {localStorage.getItem('role')=='admin' ?
+                <NavLink to="dashboard" className="nav-item nav-link ">
+                Dashboard
+              </NavLink>
+                :
+                <NavLink to="user" className="nav-item nav-link">
+                User Profile
+              </NavLink> }
+              {localStorage.getItem('user') ?
+                <li className="nav-item">
+                <NavLink onClick={logOut} className="nav-link" to="/">Logout</NavLink>
+              </li>
+                :
+                
+                  <>
+               <NavLink className="nav-link" to="login">Login</NavLink>
+                <NavLink to="register" className="nav-item nav-link ">
+                REGISTER
+              </NavLink></> }
+                 
+               </>
+                 }
+     
+      
+     <NavLink to="contact" className="btn btn-danger ">
         Call us Now
       </NavLink>
+      
     </div>
   </div>
 </nav>

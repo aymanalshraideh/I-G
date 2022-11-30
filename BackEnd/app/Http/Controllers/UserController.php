@@ -13,8 +13,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::all();
-        return $users;
+        $user = User::join('requestcars', 'requestcars.user_id', '=', 'users.id')
+              ->where('role','user')->get(['users.*', 'requestcars.*']);
+        // $user = User::where('role','user')->get();  
+        return $user;
     }
 
     /**
@@ -26,6 +28,9 @@ class UserController extends Controller
     {
         //
     }
+
+
+
 
     /**
      * Store a newly created resource in storage.
