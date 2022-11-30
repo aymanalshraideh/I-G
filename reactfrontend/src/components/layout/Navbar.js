@@ -16,11 +16,11 @@ const Navbar=()=>{
 return (
     <>
     {/* Navbar Start */}
-<nav className="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0 ">
+<nav className="navbar navbar-expand-lg  navbar-light sticky-top px-4 px-lg-5 py-lg-0 " style={{ color: 'black' }}>
   <NavLink to="index.html" className="navbar-brand d-flex align-items-center">
     
     
-    <img src={logo} alt="Logo" />
+    <img src={logo} alt="Logo"  style={{ width: '200px' }}/>
   </NavLink>
   <button
     type="button"
